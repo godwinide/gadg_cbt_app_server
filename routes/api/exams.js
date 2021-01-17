@@ -6,7 +6,7 @@ const Exam = require("../../model/Exam");
 // Get All Exams
 router.get("/", async (req,res) => {
     try{
-        const exams = await Exam.find({});
+        const exams = await Exam.find({published:true});
         return res.status(200)
         .json({
             success: true,
