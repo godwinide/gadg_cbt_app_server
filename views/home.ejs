@@ -1,0 +1,27 @@
+<div class="home container mt-5">
+    <p class="text-center lead mb-2">Exams</p>
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Questions</th>
+                <th>Time</th>
+                <th>Published</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% exams.forEach(e => {%>
+                <tr>
+                    <td><%= e.title%></td>
+                    <td><%= e.questions.length%></td>
+                    <td><%= e.duration%></td>
+                    <td><%= String(e.published) %></td>
+                    <td>
+                        <a href="/exam_detail/<%=e._id%>" class="btn btn-secondary">view</a>
+                    </td>
+                </tr>
+            <%})%>
+        </tbody>
+    </table>
+</div>

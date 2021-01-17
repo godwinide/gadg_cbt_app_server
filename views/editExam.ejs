@@ -1,0 +1,16 @@
+<div class="createExam container">
+    <form method="POST" action="/exam_detail/editExam" class="container mt-5" style="max-width:500px">
+        <h2 class="text-center mb-2">Edit Exam</h2>
+        <%-include('./partials/messages.ejs')%>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Title</label>
+          <input value="<%=typeof exam.title !== 'undefined' ? exam.title : ''%>" type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="Exam title">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Duration</label>
+          <input value="<%=typeof exam.duration !== 'undefined' ? exam.duration : '' %>" name="duration" type="number" max="50" class="form-control" id="exampleInputPassword1" placeholder="Duration in minutes">
+        </div>
+        <input type="hidden" name="id" value="<%=exam.id%>">
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+</div>

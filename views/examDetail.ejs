@@ -1,0 +1,91 @@
+<div class="container examDetail">
+    <div class="mt-5">
+        <p class="lead" style="text-transform: capitalize;"><%= exam.title%></p>
+        <div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >+ Create Question</button>
+            <form class="form-inline" style="display: inline;" method="POST" action="/exam_detail/publish">
+                <% if(exam.published){%>
+                    <button class="btn btn-success">Unpublish</button>
+                <%} else {%>
+                    <button class="btn btn-success">Publish</button>
+                <%}%>
+                <input type="hidden" name="id" value="<%=exam.id%>">
+            </form>
+            <a href="/exam_detail/editExam/<%=exam._id%>" class="btn btn-secondary">Edit</a>
+            <form method="POST" action="/exam_detail/delete" style="display: inline;">
+                <input type="hidden" name="id" value="<%=exam._id%>">
+                <button class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+        <div class="mt-5 mb-3">
+            <p class="text-center lead">Questions</p>
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Question</th>
+                        <th>Delete</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% exam.questions.forEach(e => {%>
+                        <tr>
+                            <td><%= e.question %></td>
+                            <td>
+                                <form method="POST" action="/exam_detail/deleteQuestion" style="display: inline;">
+                                    <input type="hidden" name="examID" value="<%=exam._id%>">
+                                    <input type="hidden" name="questionID" value="<%=e.id%>">
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                            <td>
+                                <a href="/exam_detail/editQuestion/<%=exam._id%>/<%=e.id%>" class="btn btn-success">Edit</a>
+                            </td>
+                        </tr>
+                    <%})%>
+                </tbody>
+            </table>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Question</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/exam_detail/createQuestion" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Image(Optional)</label>
+                          <input type="file" class="form-control" name="image" accept="image/*">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Question</label>
+                          <textarea name="question" class="form-control" aria-label="With textarea" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Answer</label>
+                          <input name="answer" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Option</label>
+                          <input name="option1" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Option</label>
+                          <input name="option2" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Option</label>
+                          <input name="option3" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                        </div>
+                        <input type="hidden" name="examID" value="<%= exam._id%>" />
+                        <button type="submit" class="btn btn-primary">Create</button>
+                      </form>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

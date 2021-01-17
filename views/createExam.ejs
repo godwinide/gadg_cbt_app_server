@@ -1,0 +1,15 @@
+<div class="createExam container">
+    <form method="POST" class="container mt-5" style="max-width:500px">
+        <h2 class="text-center mb-2">Create Exam</h2>
+        <%-include('./partials/messages.ejs')%>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Title</label>
+          <input type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="Exam title">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Duration</label>
+          <input name="duration" type="number" max="50" class="form-control" id="exampleInputPassword1" placeholder="Duration in minutes">
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </form>
+</div>

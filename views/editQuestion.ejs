@@ -1,0 +1,30 @@
+<div class="createExam container">
+    <p class="lead text-center">Edit Question</p>
+    <%-include('./partials/messages.ejs')%>
+    <form action="/exam_detail/editQuestion" method="POST" style="max-width:700px; margin: auto;">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Question</label>
+          <textarea name="question" class="form-control" aria-label="With textarea" required><%= typeof question.question !== 'undefined' ? question.question : '' %>
+          </textarea>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Answer</label>
+          <input value="<%= typeof question.options[0].text !== 'undefined' ? question.options[0].text : '' %>" name="answer" type="text" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Option</label>
+          <input value="<%= typeof question.options[1].text !== 'undefined' ? question.options[1].text : '' %>" name="option1" type="text" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Option</label>
+          <input value="<%= typeof question.options[2].text !== 'undefined' ? question.options[2].text : '' %>" name="option2" type="text" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Option</label>
+          <input value="<%= typeof question.options[3].text !== 'undefined' ? question.options[3].text : '' %>" name="option3" type="text" class="form-control" required>
+        </div>
+        <input type="hidden" name="examID" value="<%= exam._id%>" />
+        <input type="hidden" name="questionID" value="<%= question.id%>" />
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+</div>
