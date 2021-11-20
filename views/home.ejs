@@ -1,9 +1,10 @@
 <div class="home container mt-5">
-    <p class="text-center lead mb-2">Exams</p>
+    <h1 class="text-center mb-2">Exams</h1>
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>Title</th>
+                <th>Faculty</th>
                 <th>Questions</th>
                 <th>Time</th>
                 <th>Published</th>
@@ -14,12 +15,32 @@
             <% exams.forEach(e => {%>
                 <tr>
                     <td><%= e.title%></td>
+                    <td><%= e.faculty.name %></td>
                     <td><%= e.questions.length%></td>
                     <td><%= e.duration%></td>
                     <td><%= String(e.published) %></td>
                     <td>
                         <a href="/exam_detail/<%=e._id%>" class="btn btn-secondary">view</a>
                     </td>
+                </tr>
+            <%})%>
+        </tbody>
+    </table>
+    <h1 class="text-center mb-2">Faculties</h1>
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <!-- <th>Action</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <% faculties.forEach(e => {%>
+                <tr>
+                    <td><%= e.name%></td>
+                    <!-- <td>
+                        <a href="/exam_detail/<%=e._id%>" class="btn btn-secondary">Delete</a>
+                    </td> -->
                 </tr>
             <%})%>
         </tbody>

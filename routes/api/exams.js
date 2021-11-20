@@ -1,7 +1,6 @@
-
 const router = require("express").Router();
 const Exam = require("../../model/Exam");
-
+const randomizeArray = require("../../utils/randomizeArray")
 
 // Get All Exams
 router.get("/", async (req,res) => {
@@ -34,9 +33,13 @@ router.get("/:id", async (req,res) => {
             })
         }
         const exam = Exam.findById(id);
+        const examQuestions = randomizeArray(exam.questions);
         return res.status(200).json({
             success: true,
-            exam
+            exam: {
+                ...exam,
+                questions: examQuestions.slice(0, 40)
+            }
         })
     }catch(err){
         return res.status(500)

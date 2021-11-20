@@ -1,13 +1,15 @@
 const router = require("express").Router();
 const Exam = require("../model/Exam");
 const {ensureAuthenticated} = require("../config/auth");
+const Faculty = require("../model/Faculty");
 
 
 // Home
 router.get("/", ensureAuthenticated, async (req,res) => {
     try{
         const exams = await Exam.find({});
-        res.render("home", {exams});
+        const faculties = await Faculty.find({});
+        return res.render("home", {exams, faculties});
     }catch(err){
         console.log(err);
     }
@@ -20,7 +22,7 @@ router.get("one/:id", ensureAuthenticated, async (req,res) => {
         const id = req.params.id;
         if(!id){
             errors.push({msg:"Please provide a valid id"});
-            return res.status.apply(400).json({
+            return res.status(400).json({
                 success: false,
                 errors
             })

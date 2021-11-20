@@ -20,6 +20,13 @@ const ExamSchema = new Schema({
         required: false,
         default: []
     },
+    faculty:{
+        type: Object,
+        default:{
+            name: "General Studies"
+        },
+        required: false
+    },
     createdAt: {
         type: Date,
         required: false,

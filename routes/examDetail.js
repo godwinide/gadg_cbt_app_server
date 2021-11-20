@@ -40,8 +40,9 @@ router.get("/editExam/:id", ensureAuthenticated, async(req,res) => {
     try{
         const id = req.params.id;
         const exam = await Exam.findById(id);
+        const faculties = await Faculty.find({});
         if(exam){
-            return res.render("editExam", {exam});
+            return res.render("editExam", {exam, faculties});
         }
         return res.redirect("/");
     }catch(err){
@@ -52,17 +53,19 @@ router.get("/editExam/:id", ensureAuthenticated, async(req,res) => {
 router.post("/editExam", ensureAuthenticated, async(req,res) => {
     const errors = [];
     try{
-        const {title, duration, id} = req.body;
-        if(!title || !duration){
+        const {title, duration, id, faculty} = req.body;
+        const faculties = await Faculty.find({});
+
+        if(!title || !duration || !id || !faculty){
             errors.push({msg:"Please fill all fileds!"})
-            return res.render("editExam", {errors, ...req.body, exam:{id}});
+            return res.render("editExam", {errors, ...req.body, exam:{id}, faculties});
         }
         const exam = await Exam.findById(id);
         if(exam){
-            await exam.updateOne({title, duration})
+            await exam.updateOne({title, duration, faculty: {name: faculty}})
             .then(async()=> {
                 const exam = await Exam.findById(id);
-                res.render("editExam", {success_msg:"Exam updated", exam});
+                res.render("editExam", {success_msg:"Exam updated", exam, faculties});
             })
         }
         return res.redirect("/");

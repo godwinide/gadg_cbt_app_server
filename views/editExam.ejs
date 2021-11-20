@@ -7,6 +7,15 @@
           <input value="<%=typeof exam.title !== 'undefined' ? exam.title : ''%>" type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="Exam title">
         </div>
         <div class="mb-3">
+          <label for="exampleInputEmail2" class="form-label">Faculty</label>
+          <select name="faculty" class="form-select" aria-label="Default select example">
+            <option selected value="<%=exam.faculty.name%>"><%=exam.faculty.name%></option>
+            <% faculties.forEach(f => {%>
+              <option value="<%=f.name%>"><%=f.name%></option>
+            <%})%>            
+          </select>
+        </div>
+        <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Duration</label>
           <input value="<%=typeof exam.duration !== 'undefined' ? exam.duration : '' %>" name="duration" type="number" max="50" class="form-control" id="exampleInputPassword1" placeholder="Duration in minutes">
         </div>
